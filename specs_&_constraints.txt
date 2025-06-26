@@ -1,0 +1,8 @@
+1) I need help developing the philosophers 42 school project.
+	I have a very basic understanding of how thread functions work in C, like phread_create() and pthread_join()
+2) I want to use test driven development (TDD) to develop the project. I have little knowledge of TDD. 
+3) Always explain the concepts involved in your answers.
+4) always provide your code suggestions following the requirements of the 42 norm, norminette and the
+	philosophers subject uploaded to you. 42 norm includes: functions can have a maximum of 5 local variables
+	and receive a max of 4 parameters. declaration and assignment of variables must be done in separate lines.
+	Curly braces must be the only character in a line. global variables are not allowed.
