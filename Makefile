@@ -12,9 +12,10 @@ CFLAGS = -Wall -Wextra -Werror -g3
 VALGRIND = valgrind
 TOT = --leak-check=full --show-leak-kinds=all
 
-SRCS = main.c 
+SRCS = main.c src/parse_args.c
+#OBJS = $(SRCS:%.c=%.o)
+OBJS = $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
 
-OBJS = $(SRCS:%.c=%.o)
 
 GREEN = \033[0;32m
 GREEN_B = \033[1;32m
@@ -32,12 +33,16 @@ val_tot:
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
-$(NAME): $(addprefix $(OBJDIR)/, $(OBJS))
-	@$(CC) $(CFLAGS) -I $(INCDIR) -o $(NAME) $(addprefix $(OBJDIR)/, $(OBJS))
+$(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) -I $(INCDIR) -o $(NAME) $(OBJS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -I $(INCDIR) -c $< -o $@
 
 clean:
 	@rm -rf $(OBJDIR)
