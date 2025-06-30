@@ -12,8 +12,8 @@ CFLAGS = -Wall -Wextra -Werror -g3
 VALGRIND = valgrind
 TOT = --leak-check=full --show-leak-kinds=all
 
-SRCS = main.c src/parse_args.c
-#OBJS = $(SRCS:%.c=%.o)
+SRCS = main.c src/parse_args.c src/utils.c
+
 OBJS = $(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
 
 

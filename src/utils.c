@@ -1,42 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/26 17:40:56 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/06/30 19:02:23 by ekeller-@st      ###   ########.fr       */
+/*   Created: 2025/06/30 18:58:49 by ekeller-@st       #+#    #+#             */
+/*   Updated: 2025/06/30 18:59:21 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-
-
-void	start_simulation(t_table *monitor)
+long int	ft_time(void)
 {
-	int	i;
-	pthread_t	*philo;
-	
-	i = 0;
-	while (i < monitor->n_philo)
-	{
-		pthread_create(philo[i], )
-	}
+	struct timeval	start;
+
+	gettimeofday(&start, NULL);
+	return ((start.tv_sec * 1000) + (start.tv_usec / 1000));
 }
 
-int	main(int argc, char **argv)
+long int	get_elapsed_time(t_table *monitor)
 {
-	t_table	*monitor;
+	long int current_time;
 
-
-	monitor = malloc(sizeof(t_table));
-	if (parse_args(argc, argv, monitor) != 0)
-		return (1);
-	usleep(1000000);
-	
-	printf("sleep time: %ld\n", get_elapsed_time(monitor));
-	free(monitor);
-	return (0);
+	current_time = ft_time();
+	return (current_time - monitor->start_time);
 }

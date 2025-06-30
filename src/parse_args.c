@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekeller- <ekeller-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 17:41:15 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/06/27 20:25:41 by ekeller-         ###   ########.fr       */
+/*   Updated: 2025/06/30 17:41:54 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../includes/philo.h"
 
@@ -57,30 +57,34 @@ static int	is_numeric(char **argv)
 	return (0);
 }
 
-static void	init_struct(char **argv, t_monitor *data)
+static void	init_struct(char **argv, t_table *monitor)
 {
-	data->n_philo = ft_atoi(argv[1]);
-	data->time_die = ft_atoi(argv[2]);
-	data->time_eat = ft_atoi(argv[3]);
-	data->time_sleep = ft_atoi(argv[4]);
+	monitor->n_philo = ft_atoi(argv[1]);
+	monitor->time_die = ft_atoi(argv[2]);
+	monitor->time_eat = ft_atoi(argv[3]);
+	monitor->time_sleep = ft_atoi(argv[4]);
+	monitor->start_time = ft_time();
 	if (argv[5])
-		data->n_eat = ft_atoi(argv[5]);
+		monitor->n_eat = ft_atoi(argv[5]);
 	else
-		data->n_eat = -1;
+		monitor->n_eat = -1;
 	return ;
 }
 
-int	parse_args(int argc, char **argv, t_monitor *data)
+int	parse_args(int argc, char **argv, t_table *monitor)
 {
 	if (argc < 5 || argc > 6)
 	{
 		printf ("wrong number of arguments\n");
 		printf ("args: n_philo, time_to_die, time_to_eat, time_to_sleep, n_eat(optional)\n");
+		free(monitor);
 		return (1);
 	}
 	if (is_numeric(argv) != 0)
+	{
+		free(monitor);
 		return 1;
-	init_struct(argv, data);
-	
+	}	
+	init_struct(argv, monitor);
 	return (0);
 }
