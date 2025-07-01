@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 17:41:15 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/06/30 17:41:54 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/07/01 12:50:38 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,34 +57,30 @@ static int	is_numeric(char **argv)
 	return (0);
 }
 
-static void	init_struct(char **argv, t_table *monitor)
+static void	fill_args(char **argv, t_table *table)
 {
-	monitor->n_philo = ft_atoi(argv[1]);
-	monitor->time_die = ft_atoi(argv[2]);
-	monitor->time_eat = ft_atoi(argv[3]);
-	monitor->time_sleep = ft_atoi(argv[4]);
-	monitor->start_time = ft_time();
+	table->n_philo = ft_atoi(argv[1]);
+	table->time_die = ft_atoi(argv[2]);
+	table->time_eat = ft_atoi(argv[3]);
+	table->time_sleep = ft_atoi(argv[4]);
+	table->start_time = ft_time();
 	if (argv[5])
-		monitor->n_eat = ft_atoi(argv[5]);
+		table->n_eat = ft_atoi(argv[5]);
 	else
-		monitor->n_eat = -1;
+		table->n_eat = -1;
 	return ;
 }
 
-int	parse_args(int argc, char **argv, t_table *monitor)
+int	parse_args(int argc, char **argv, t_table *table)
 {
 	if (argc < 5 || argc > 6)
 	{
 		printf ("wrong number of arguments\n");
 		printf ("args: n_philo, time_to_die, time_to_eat, time_to_sleep, n_eat(optional)\n");
-		free(monitor);
 		return (1);
 	}
 	if (is_numeric(argv) != 0)
-	{
-		free(monitor);
 		return 1;
-	}	
-	init_struct(argv, monitor);
+	fill_args(argv, table);
 	return (0);
 }

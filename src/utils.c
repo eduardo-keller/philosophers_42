@@ -20,10 +20,10 @@ long int	ft_time(void)
 	return ((start.tv_sec * 1000) + (start.tv_usec / 1000));
 }
 
-long int	get_elapsed_time(t_table *monitor)
+long int	get_elapsed_time(t_table *table)
 {
 	long int current_time;
 
 	current_time = ft_time();
-	return (current_time - monitor->start_time);
+	return (current_time - table->start_time);
 }
