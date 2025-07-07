@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 17:40:41 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/07/04 16:23:23 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/07/07 18:21:13 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ typedef struct s_philo
 	t_table			*table;
 	t_fork			*left_fork;
 	t_fork			*right_fork;
-	unsigned long	last_meal;
-	int				died;
-	pthread_mutex_t	m_last_meal;
+	unsigned long	t_last_meal;
+	pthread_mutex_t	t_last_meal_mut;
+	pthread_mutex_t	meals_eaten_mut;
 }	t_philo;
 
 typedef struct s_table
 {
 	int				n_philo;
-	int				time_die;
+	unsigned long long			time_die;
 	int				time_eat;
 	int				time_sleep;
 	int				n_eat;
@@ -51,13 +51,25 @@ typedef struct s_table
 	t_philo			*philo;
 	t_fork			*forks;
 	pthread_t		monitor;
+	int				is_dead;
+	pthread_mutex_t	write_mutex;
+	pthread_mutex_t	is_dead_mut;
 }	t_table;
 
 
 //parse_args.c
-int			parse_args(int argc, char **argv, t_table *table);
+int						parse_args(int argc, char **argv, t_table *table);
 
 //utils.c
-long int	ft_time(void);
-long int	get_elapsed_time(t_table *table);
-int			check_one_philo(t_table  *table);
+unsigned long long int	get_time(void);
+unsigned long long int	get_elapsed_time(t_table *table);
+int						check_one_philo(t_table  *table);
+int						is_even(t_philo *philo);
+void					safe_print(char *str, t_table *table);
+
+//mutex.c
+int						init_mutex(t_table *table);
+
+//philo_routine.c
+void					*philo_routine(void *philo_arg);
+int						check_dead_flag(t_table *table);

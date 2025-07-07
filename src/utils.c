@@ -6,13 +6,13 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:58:49 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/07/04 12:08:11 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/07/07 17:26:08 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-long int	ft_time(void)
+unsigned long long int get_time(void)
 {
 	struct timeval	start;
 
@@ -20,11 +20,11 @@ long int	ft_time(void)
 	return ((start.tv_sec * 1000) + (start.tv_usec / 1000));
 }
 
-long int	get_elapsed_time(t_table *table)
+unsigned long long int	get_elapsed_time(t_table *table)
 {
-	long int current_time;
+	unsigned long long int current_time;
 
-	current_time = ft_time();
+	current_time = get_time();
 	return (current_time - table->start_time);
 }
 
@@ -33,9 +33,34 @@ int	check_one_philo(t_table  *table)
 	if (table->n_philo == 1)
 	{
 		usleep(table->time_die * 1000);
-		printf("%ld %i died\n", get_elapsed_time(table), table->philo->id);
+		safe_print("died", table);
 		//free
 		return (1);
 	}
 	return (0);
+}
+
+int	is_even(t_philo *philo)
+{
+	if (philo->id % 2 == 0)
+		return (1);
+	else
+		return (0);
+}
+
+void	safe_print(char *str, t_table *table)
+{
+	unsigned long long	time;
+	
+	pthread_mutex_lock(&table->is_dead_mut);
+	if (table->is_dead)
+	{
+		pthread_mutex_unlock(&table->is_dead_mut);
+		return ;
+	}
+	pthread_mutex_unlock(&table->is_dead_mut);
+	time = get_elapsed_time(table);
+	pthread_mutex_lock(&table->write_mutex);
+	printf("%lld %d %s\n", time, table->philo->id, str);
+	pthread_mutex_unlock(&table->write_mutex);
 }

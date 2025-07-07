@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 17:41:15 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/07/03 13:24:44 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/07/07 17:27:58 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	fill_args(char **argv, t_table *table)
 	table->time_die = ft_atoi(argv[2]);
 	table->time_eat = ft_atoi(argv[3]);
 	table->time_sleep = ft_atoi(argv[4]);
-	table->start_time = ft_time();
+	table->start_time = get_time();
 	if (argv[5])
 		table->n_eat = ft_atoi(argv[5]);
 	else
