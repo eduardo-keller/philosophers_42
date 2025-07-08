@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:58:49 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/07/07 17:26:08 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/07/08 17:16:19 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,34 +33,34 @@ int	check_one_philo(t_table  *table)
 	if (table->n_philo == 1)
 	{
 		usleep(table->time_die * 1000);
-		safe_print("died", table);
+		safe_print("died", &table->philo[0]);
 		//free
 		return (1);
 	}
 	return (0);
 }
 
-int	is_even(t_philo *philo)
-{
-	if (philo->id % 2 == 0)
-		return (1);
-	else
-		return (0);
-}
+// int	is_even(t_philo *philo)
+// {
+// 	if (philo->id % 2 == 0)
+// 		return (1);
+// 	else
+// 		return (0);
+// }
 
-void	safe_print(char *str, t_table *table)
+void	safe_print(char *str, t_philo *philo)
 {
 	unsigned long long	time;
 	
-	pthread_mutex_lock(&table->is_dead_mut);
-	if (table->is_dead)
+	pthread_mutex_lock(&philo->table->is_dead_mut);
+	if (philo->table->is_dead)
 	{
-		pthread_mutex_unlock(&table->is_dead_mut);
+		pthread_mutex_unlock(&philo->table->is_dead_mut);
 		return ;
 	}
-	pthread_mutex_unlock(&table->is_dead_mut);
-	time = get_elapsed_time(table);
-	pthread_mutex_lock(&table->write_mutex);
-	printf("%lld %d %s\n", time, table->philo->id, str);
-	pthread_mutex_unlock(&table->write_mutex);
+	pthread_mutex_unlock(&philo->table->is_dead_mut);
+	time = get_elapsed_time(philo->table);
+	pthread_mutex_lock(&philo->table->write_mutex);
+	printf("%lld %d %s\n", time, philo->id, str);
+	pthread_mutex_unlock(&philo->table->write_mutex);
 }

@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 12:17:38 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/07/07 15:42:32 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/07/08 14:49:34 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	init_fork_mutex(t_table *table)
 	i = 0;
 	while (i < table->n_philo)
 	{
-		pthread_mutex_init(&table->philo[i].left_fork->m_fork, NULL);
+		pthread_mutex_init(&table->forks[i].m_fork, NULL);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 17:40:41 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/07/07 18:21:13 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/07/08 15:01:18 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ unsigned long long int	get_time(void);
 unsigned long long int	get_elapsed_time(t_table *table);
 int						check_one_philo(t_table  *table);
 int						is_even(t_philo *philo);
-void					safe_print(char *str, t_table *table);
+void					safe_print(char *str, t_philo *philo);
 
 //mutex.c
 int						init_mutex(t_table *table);
@@ -73,3 +73,7 @@ int						init_mutex(t_table *table);
 //philo_routine.c
 void					*philo_routine(void *philo_arg);
 int						check_dead_flag(t_table *table);
+
+//init.c
+int						init_philos(t_table *table);
+int						init_table(t_table *table);
