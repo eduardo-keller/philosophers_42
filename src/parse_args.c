@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 17:41:15 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/07/08 13:20:00 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/07/09 15:56:28 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	is_numeric(char **argv)
 			if (argv[i][j] < '0' || argv[i][j] > '9')
 			{
 				printf("numeric argument required\n");
-				return (1);	
+				return (1);
 			}
 			j++;
 		}
@@ -65,9 +65,9 @@ static void	fill_args(char **argv, t_table *table)
 	table->time_sleep = ft_atoi(argv[4]);
 	table->start_time = get_time();
 	if (argv[5])
-		table->n_eat = ft_atoi(argv[5]);
+		table->n_meal = ft_atoi(argv[5]);
 	else
-		table->n_eat = -1;
+		table->n_meal = -1;
 	return ;
 }
 
@@ -76,11 +76,12 @@ int	parse_args(int argc, char **argv, t_table *table)
 	if (argc < 5 || argc > 6)
 	{
 		printf ("wrong number of arguments\n");
-		printf ("args: n_philo, time_to_die, time_to_eat, time_to_sleep, n_eat(optional)\n");
+		printf ("args: n_philo, time_to_die, time_to_eat, "
+			"time_to_sleep, n_eat(optional)\n");
 		return (1);
 	}
 	if (is_numeric(argv) != 0)
-		return 1;
+		return (1);
 	fill_args(argv, table);
 	return (0);
 }
