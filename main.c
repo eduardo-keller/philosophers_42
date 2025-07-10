@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 17:40:56 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/07/10 15:27:27 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/07/10 15:50:56 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	main(int argc, char **argv)
 {
 	t_table	table;
 
-	int i = 0;
 	if (parse_args(argc, argv, &table) != 0)
 		return (1);
 	if (init_table(&table))
@@ -50,11 +49,6 @@ int	main(int argc, char **argv)
 		return (1);
 	init_mutex(&table);
 	start_simulation(&table);
-	while (i < table.n_philo)
-	{
-		printf("philo %i ate %i times\n", table.philo[i].id, table.philo[i].meals_eaten);
-		i++;
-	}
 	destroy_mutex(&table);
 	free(table.forks);
 	free(table.philo);

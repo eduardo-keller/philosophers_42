@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:58:49 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/07/10 15:24:32 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/07/10 15:51:39 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ unsigned long long int	get_elapsed_time(t_table *table)
 	current_time = get_time();
 	return (current_time - table->start_time);
 }
-
 
 void	safe_print(char *str, t_philo *philo)
 {

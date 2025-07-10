@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:58:59 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/07/09 18:05:15 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/07/10 15:51:26 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,6 @@ void	precise_sleep(long time, t_table *table)
 		else
 			usleep(100);
 		if (check_end_simulation(table))
-            break;
+			break ;
 	}
 }

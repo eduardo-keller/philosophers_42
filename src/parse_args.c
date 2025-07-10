@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 17:41:15 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/07/09 15:56:28 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/07/10 15:50:16 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,10 @@ int	parse_args(int argc, char **argv, t_table *table)
 	if (is_numeric(argv) != 0)
 		return (1);
 	fill_args(argv, table);
+	if (table->n_meal == 0)
+	{
+		printf ("number of meals must be greater than zero\n");
+		return (1);
+	}
 	return (0);
 }
