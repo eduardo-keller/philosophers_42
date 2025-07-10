@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:58:49 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/07/09 18:46:46 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/07/10 15:24:32 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,6 @@ unsigned long long int	get_elapsed_time(t_table *table)
 	return (current_time - table->start_time);
 }
 
-// int	check_one_philo(t_table *table)
-// {	
-// 	if (table->n_philo == 1)
-// 	{
-// 		printf("%lld 1 has taken a fork", )
-// 		usleep(table->time_die * 1000);
-// 		printf("%lld %d %s\n", time);
-// 		free(table->forks);
-// 		free(table->philo);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
 
 void	safe_print(char *str, t_philo *philo)
 {

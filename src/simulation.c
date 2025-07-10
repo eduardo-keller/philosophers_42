@@ -6,7 +6,7 @@
 /*   By: ekeller-@student.42sp.org.br <ekeller-@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 14:29:07 by ekeller-@st       #+#    #+#             */
-/*   Updated: 2025/07/09 18:12:06 by ekeller-@st      ###   ########.fr       */
+/*   Updated: 2025/07/10 15:26:16 by ekeller-@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static void	eat_routine(t_philo *philo)
 	pthread_mutex_lock(&philo->t_last_meal_mut);
 	philo->t_last_meal = get_time();
 	pthread_mutex_unlock(&philo->t_last_meal_mut);
-	safe_print("is eating", philo);
-	precise_sleep(philo->table->time_eat, philo->table);
 	pthread_mutex_lock(&philo->meals_eaten_mut);
 	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->meals_eaten_mut);
+	safe_print("is eating", philo);
+	precise_sleep(philo->table->time_eat, philo->table);
 	pthread_mutex_unlock(&philo->right_fork->m_fork);
 	pthread_mutex_unlock(&philo->left_fork->m_fork);
 }
@@ -35,6 +35,11 @@ void	*philo_routine(void *philo_arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)philo_arg;
+	if (philo->table->n_philo == 1)
+	{
+		safe_print("has take a fork", philo);
+		return (NULL);
+	}
 	while (1)
 	{
 		if (check_end_simulation(philo->table))
